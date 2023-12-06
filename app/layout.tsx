@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
 import { ThemeProvider } from '@/components/theme-provider'
+import { SessionProvider } from '@/components/session-provider'
 import { Navbar } from '@/components/nav/Navbar'
 
 import './globals.css'
@@ -32,6 +33,7 @@ export default function RootLayout({
             {children}
           </main>
         </ThemeProvider>
+        <SessionProvider />
       </body>
     </html>
   )
