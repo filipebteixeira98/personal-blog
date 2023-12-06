@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
 import { ThemeProvider } from '@/components/theme-provider'
+import { Navbar } from '@/components/nav/Navbar'
 
 import './globals.css'
 
@@ -26,7 +27,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <main className="max-w-7xl mx-auto p-10 space-y-5">
+            <Navbar />
+            {children}
+          </main>
         </ThemeProvider>
       </body>
     </html>
