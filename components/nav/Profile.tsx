@@ -1,3 +1,4 @@
+import { createBrowserClient } from '@supabase/ssr'
 import Image from 'next/image'
 import Link from 'next/link'
 import { DashboardIcon, LockOpen1Icon } from '@radix-ui/react-icons'
@@ -13,6 +14,18 @@ import { Button } from '@/components/ui/button'
 
 export function Profile() {
   const user = useUserStore((state) => state.user)
+  const setUser = useUserStore((state) => state.setUser)
+
+  const supabase = createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  )
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut()
+
+    setUser(undefined)
+  }
 
   return (
     <Popover>
@@ -43,6 +56,7 @@ export function Profile() {
           <Button
             variant="ghost"
             className="w-full flex items-center justify-between"
+            onClick={handleLogout}
           >
             Logout
             <LockOpen1Icon />
