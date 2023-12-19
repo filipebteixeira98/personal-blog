@@ -40,8 +40,8 @@ export function Profile() {
       </PopoverTrigger>
       <PopoverContent className="p-2 space-y-3 divide-y">
         <div className="px-4 text-sm">
-          <p>{user?.user_metadata.user_name}</p>
-          <p className="text-gray-500">{user?.user_metadata.email}</p>
+          <p>{user?.user_metadata?.user_name}</p>
+          <p className="text-gray-500">{user?.user_metadata?.email}</p>
         </div>
         <Link href="/dashboard" className="block">
           <Button
@@ -52,16 +52,14 @@ export function Profile() {
             <DashboardIcon />
           </Button>
         </Link>
-        <Link href="/dashboard" className="block">
-          <Button
-            variant="ghost"
-            className="w-full flex items-center justify-between"
-            onClick={handleLogout}
-          >
-            Logout
-            <LockOpen1Icon />
-          </Button>
-        </Link>
+        <Button
+          variant="ghost"
+          className="w-full flex items-center justify-between"
+          onClick={handleLogout}
+        >
+          Logout
+          <LockOpen1Icon />
+        </Button>
       </PopoverContent>
     </Popover>
   )
