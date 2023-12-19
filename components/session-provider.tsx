@@ -24,9 +24,5 @@ export function SessionProvider() {
     // eslint-disable-next-line
   }, [])
 
-  return (
-    <div>
-      <p></p>
-    </div>
-  )
+  return <></>
 }
