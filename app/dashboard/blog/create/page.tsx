@@ -44,6 +44,7 @@ export default function BlogForm() {
   const [isPreview, setIsPreview] = useState(false)
 
   const form = useForm<z.infer<typeof FormSchema>>({
+    mode: 'all',
     resolver: zodResolver(FormSchema),
     defaultValues: {
       title: '',
@@ -128,7 +129,10 @@ export default function BlogForm() {
               )}
             />
           </div>
-          <Button className="flex items-center gap-1">
+          <Button
+            className="flex items-center gap-1"
+            disabled={!form.formState.isValid}
+          >
             <BsSave />
             Save
           </Button>
@@ -167,7 +171,8 @@ export default function BlogForm() {
                   </div>
                 </div>
               </FormControl>
-              <FormMessage />
+              {form.getFieldState('title').invalid &&
+                form.getValues().title && <FormMessage />}
             </FormItem>
           )}
         />
