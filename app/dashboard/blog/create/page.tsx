@@ -71,7 +71,7 @@ export default function BlogForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full border rounded-md space-y-6"
+        className="w-full border rounded-md space-y-6 pb-10"
       >
         <div className="p-5 flex items-center flex-wrap justify-between border-b gap-5">
           <div className="flex gap-5 items-center flex-wrap">
@@ -253,7 +253,7 @@ export default function BlogForm() {
                   />
                   <div
                     className={cn(
-                      'lg:px-10',
+                      'overflow-y-auto',
                       isPreview
                         ? 'mx-auto w-full lg:w-4/5'
                         : 'w-1/2 lg:block hidden'
