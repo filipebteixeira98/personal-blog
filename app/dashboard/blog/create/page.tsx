@@ -2,32 +2,32 @@
 
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
+import { BsSave } from 'react-icons/bs'
 import {
   EyeOpenIcon,
   Pencil1Icon,
   RocketIcon,
   StarIcon,
 } from '@radix-ui/react-icons'
-import { BsSave } from 'react-icons/bs'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as z from 'zod'
+import Image from 'next/image'
 
 import { cn } from '@/lib/utils'
 
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from '@/components/ui/form'
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 import { toast } from '@/components/ui/use-toast'
-import Image from 'next/image'
+import { MarkdownPreview } from '@/components/markdown/MarkdownPreview'
 
 const FormSchema = z.object({
   title: z.string().min(2, {
@@ -74,7 +74,7 @@ export default function BlogForm() {
         className="w-full border rounded-md space-y-6"
       >
         <div className="p-5 flex items-center flex-wrap justify-between border-b gap-5">
-          <div className="flex gap-5 items-center">
+          <div className="flex gap-5 items-center flex-wrap">
             <span
               role="button"
               tabIndex={0}
@@ -228,6 +228,43 @@ export default function BlogForm() {
                     <FormMessage />
                   </div>
                 )}
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="content"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <div
+                  className={cn(
+                    'p-2 w-full flex break-words gap-2 h-70vh',
+                    isPreview ? 'divide-x-0' : 'divide-x'
+                  )}
+                >
+                  <Textarea
+                    placeholder="content"
+                    {...field}
+                    className={cn(
+                      'border-none text-lg font-medium leading-relaxed resize-none h-full',
+                      isPreview ? 'w-0 p-0' : 'w-full lg:w-1/2'
+                    )}
+                  />
+                  <div
+                    className={cn(
+                      'lg:px-10',
+                      isPreview
+                        ? 'mx-auto w-full lg:w-4/5'
+                        : 'w-1/2 lg:block hidden'
+                    )}
+                  >
+                    <MarkdownPreview content={form.getValues().content} />
+                  </div>
+                </div>
+              </FormControl>
+              {form.getFieldState('content').invalid &&
+                form.getValues().content && <FormMessage />}
             </FormItem>
           )}
         />
