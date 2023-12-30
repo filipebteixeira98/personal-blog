@@ -3,6 +3,7 @@ import rehypeHighlight from 'rehype-highlight'
 import { PiTerminalThin } from 'react-icons/pi'
 
 import { cn } from '@/lib/utils'
+import { icons } from '@/lib/icons'
 
 import { CopyButton } from './CopyButton'
 
@@ -34,6 +35,12 @@ export function MarkdownPreview({
 
           if (match?.length) {
             let Icon = PiTerminalThin
+
+            const isMatch = icons.hasOwnProperty(match[1])
+
+            if (isMatch) {
+              Icon = icons[match[1] as keyof typeof icons]
+            }
 
             const id = (Math.floor(Math.random() * 100) + 1).toString()
 
