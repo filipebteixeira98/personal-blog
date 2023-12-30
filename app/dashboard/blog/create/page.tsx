@@ -79,7 +79,11 @@ export default function BlogForm() {
               role="button"
               tabIndex={0}
               className="flex items-center gap-1 border bg-zinc-700 p-2 rounded-md hover:ring-2 hover:ring-zinc-400 transition-all"
-              onClick={() => setIsPreview(!isPreview)}
+              onClick={() =>
+                setIsPreview(
+                  !isPreview && !form.getFieldState('image_url').invalid
+                )
+              }
             >
               {isPreview ? (
                 <>
